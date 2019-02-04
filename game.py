@@ -1,50 +1,57 @@
-"""A number-guessing game."""
-print('Hello !')
+'''A number guessing game '''
 
-input('What is your name?')
+from random import randint
 
-import random
+print('Let\'s play a game !')
 
-rand = random.randint(1, 100)
+name = input('What is your name ? ')
 
-user_guess = input("Guess a number.")
+def guess_num():
+    play_again = 'y'
+    best_score = 10000000000
+    max_tries = 10
 
-counter = 0
+    while play_again == 'y':
 
-while user_guess != rand:
-    try: 
-        type(user_guess) != int or user_guess < 0 or user_guess > 100
-
-        user_guess = input("Please enter a valid number between 1 and 100.")
-        
-        
-
-#        if type(user_guess) != int:
-#            print("I said a number please")
-#        user_guess = int(input("Guess a number."))
-
-    except:
-        print("It's an exception.")
-        break
-'''    if  type(user_guess) != int:
-        print("I said a number please")
-        user_guess = int(input("Guess a number."))
-    if user_guess > 100 or user_guess < 1:
-        print("Enter a number between 1 and 100")
-        user_guess = int(input("Guess a number."))
-
-    elif user_guess < rand:
-        print("choose a higher number")
-        counter += 1
-        user_guess = int(input("Guess a number."))
-
-    elif user_guess > rand:
-        print("choose a lower number")
-        counter += 1
-        user_guess = int(input("Guess a number."))
+        number = randint(1,100)
+        # print(number) #TEST
 
 
-#if user_guess == rand:
-print("Awesome ! You guessed it !")
+        i = 0
+        guess = int()
 
-print(counter)'''
+        while i < max_tries:
+            i+=1
+
+            while True:
+                try:
+                    guess = int(input('Guess my number between 1 and 100' ))
+                    
+                    break
+
+                except ValueError:
+                    print("That's not an INT ! Please enter a valid one")
+
+
+            if guess > 100 or guess< 1:
+                print('Try again . Only between 1 and 100 .')
+
+            elif guess > number:
+                print('Too high. Try a lower number.')
+
+            elif guess < number:
+                print('Too low. Try a higher number')
+
+            else: 
+                  print('Well done {} ! You found it in {} tries.'.format(name,i))
+                  if i < best_score:
+                      best_score = i
+                  print('Your current best is {} tries.'.format(best_score))
+                  break
+        if i == max_tries:
+            print("Too many attempts")
+        play_again = input('Wanna give it another go ? (Y) or (N) ? ')
+
+
+guess_num()
+
